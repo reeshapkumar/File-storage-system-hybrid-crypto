@@ -19,13 +19,11 @@ Integration with cloud storage for file uploads (e.g., AWS S3, Google Cloud Stor
 
 **Install necessary Python packages:**
 ```bash
-Copy code
 pip install pycryptodome boto3
 Install AWS CLI and configure it if you plan to use AWS S3 for cloud storage:
 ```
 
 ```bash
-Copy code
 pip install awscli
 aws configure
 ```
@@ -42,7 +40,6 @@ aws configure
 RSA keys are used to securely encrypt and decrypt the AES key.
 
 ```python
-Copy code
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto.Random import get_random_bytes
@@ -68,7 +65,6 @@ generate_rsa_keys()
 Encrypt the file content using AES and encrypt the AES key using RSA.
 
 ```python
-Copy code
 from Crypto.Cipher import AES
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto.PublicKey import RSA
@@ -107,7 +103,6 @@ encrypt_file("example.txt", "public.pem")
 Decrypt the file by decrypting the AES key using the RSA private key, then decrypt the file data using the AES key.
 
 ```python
-Copy code
 from Crypto.Cipher import AES, PKCS1_OAEP
 from Crypto.PublicKey import RSA
 
@@ -141,7 +136,6 @@ decrypt_file("example.txt.enc", "private.pem")
 After decryption, verify file integrity by comparing hashes of the original and decrypted files.
 
 ```python
-Copy code
 def calculate_file_hash(file_path):
     hash_sha256 = sha256()
 
@@ -166,7 +160,6 @@ Use boto3 to upload the encrypted file to AWS S3.
 ```
 
 ```python
-Copy code
 import boto3
 
 def upload_to_s3(file_name, bucket_name):
@@ -183,7 +176,6 @@ Download the encrypted file back from AWS S3.
 ```
 
 ```python
-Copy code
 def download_from_s3(file_name, bucket_name):
     s3 = boto3.client('s3')
     try:
